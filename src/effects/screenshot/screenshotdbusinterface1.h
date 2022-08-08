@@ -46,6 +46,12 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     Q_SCRIPTABLE void screenshotForWindow(qulonglong winid, int mask = 0);
+
+    /**
+     * Takes a screenshot with using window's uuid
+     */
+    Q_SCRIPTABLE void screenshotForWindow(const QString &uuidText, int mask);
+
     /**
      * Starts an interactive window screenshot session. The user can select a window to
      * screenshot.

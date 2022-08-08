@@ -568,6 +568,17 @@ void ScreenShotDBusInterface1::screenshotForWindow(qulonglong winId, int mask)
     takeScreenShot(window, ScreenShotFlags(mask), new ScreenShotSinkXpixmap1(this, message()));
 }
 
+void ScreenShotDBusInterface1::screenshotForWindowUuid(const QString &uuidText, int mask)
+{
+    QUuid uuid(uuidText);
+    EffectWindow *window = effects->findWindow(uuid);
+    if (!window || window->isMinimized() || window->isDeleted()) {
+        return;
+    }
+
+    takeScreenShot(window, ScreenShotFlags(mask), new ScreenShotSinkXpixmap1(this, message()));
+}
+
 QString ScreenShotDBusInterface1::interactive(int mask)
 {
     if (!calledFromDBus()) {
